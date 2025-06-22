@@ -32,6 +32,11 @@ app.post("/add-log" , (req , res)=>{
   res.redirect("/dashboard");
 });
 
+app.post("/clear-logs" , (req , res) =>{
+  fs.writeFileSync("./data/logs.json" , "[]");
+  res.redirect("/dashboard");
+});
+
 app.listen(3000, () => {
   console.log("Server running on http://localhost:3000");
 });
