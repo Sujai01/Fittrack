@@ -1,39 +1,57 @@
 <head>
-<link rel="stylesheet" href="/CSS/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Workout History</title>
 </head>
 
-<body>
-  <div class="container">
+<body class="bg-gray-100 text-gray-900 font-sans">
+  <div class="max-w-4xl mx-auto px-4 py-8">
 
-    <h1>📓 Workout History</h1>
 
-    <h2>💪 Gym Logs</h2>
-    <ul>
-      <% gymLogs.forEach(log => { %>
-        <li>
-          <strong><%= log.date %></strong> |
-          <%= log.exerciseName || log.details %>
-          <% if (log.reps) { %>
-            – <%= log.reps.join(", ") %> reps
-          <% } %>
-        </li>
-      <% }) %>
-    </ul>
+   <h1 class="text-3xl font-bold mb-6 text-center">📒 Workout History</h1>
 
-    <h2>🏸 Badminton Logs</h2>
-    <ul>
-      <% badmintonLogs.forEach(log => { %>
-        <li>
-          <strong><%= log.date %></strong> | <%= log.details %>
-        </li>
-      <% }) %>
-    </ul>
+<!-- GYM LOGS -->
+<div class="mb-8">
+  <h2 class="text-xl font-semibold text-blue-700 mb-2">💪 Gym Logs</h2>
+  <ul class="space-y-3">
+    <% gymLogs.forEach(log => { %>
+      <li class="bg-white p-4 rounded shadow flex flex-col gap-1">
+        <span class="font-semibold text-gray-800"><%= log.date %></span>
+        <span class="text-gray-700"><%= log.exerciseName || log.details %></span>
+        <% if (log.reps) { %>
+          <span class="text-sm text-gray-500">🌀 <%= log.reps.join(", ") %> reps</span>
+        <% } %>
+      </li>
+    <% }) %>
+  </ul>
+</div>
 
-    <form action="/clear-logs" method="POST">
-      <button type="submit">Clear logs</button>
-    </form>
+<!-- BADMINTON LOGS -->
+<div class="mb-8">
+  <h2 class="text-xl font-semibold text-green-700 mb-2">🏸 Badminton Logs</h2>
+  <ul class="space-y-3">
+    <% badmintonLogs.forEach(log => { %>
+      <li class="bg-white p-4 rounded shadow flex flex-col gap-1">
+        <span class="font-semibold text-gray-800"><%= log.date %></span>
+        <span class="text-gray-700"><%= log.details %></span>
+      </li>
+    <% }) %>
+  </ul>
+</div>
 
-    <a href="/dashboard">⬅️ Back to Dashboard</a>
+
+    <form action="/clear-logs" method="POST" class="mb-4">
+  <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded shadow">
+    🗑️ Clear Logs
+  </button>
+</form>
+
+
+    <a href="/dashboard" class="text-blue-600 hover:underline flex items-center gap-1">
+  🔙 Back to Dashboard
+</a>
+
 
   </div>
 </body>
