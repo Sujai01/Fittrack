@@ -1,0 +1,49 @@
+<head>
+<link rel="stylesheet" href="/CSS/styles.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>📓 Workout History</h1>
+
+    <h2>💪 Gym Logs</h2>
+    <ul>
+      <% gymLogs.forEach(log => { %>
+        <li>
+          <strong><%= log.date %></strong> |
+          <%= log.exerciseName || log.details %>
+          <% if (log.reps) { %>
+            – <%= log.reps.join(", ") %> reps
+          <% } %>
+        </li>
+      <% }) %>
+    </ul>
+
+    <h2>🏸 Badminton Logs</h2>
+    <ul>
+      <% badmintonLogs.forEach(log => { %>
+        <li>
+          <strong><%= log.date %></strong> | <%= log.details %>
+        </li>
+      <% }) %>
+    </ul>
+
+    <form action="/clear-logs" method="POST">
+      <button type="submit">Clear logs</button>
+    </form>
+
+    <a href="/dashboard">⬅️ Back to Dashboard</a>
+
+  </div>
+</body>
+
+<script>
+  fetch("/api/logs")
+    .then(res => res.json())
+    .then(data => {
+      console.log("Fetched logs from API:", data);
+      // You can display them dynamically inside a <div> or <ul>
+    })
+    .catch(err => console.error("Error loading logs:", err));
+</script>
